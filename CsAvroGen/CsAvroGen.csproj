@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>holonsoft.CsAvroGen</RootNamespace>
+    <Version>1.0.0.0</Version>
+    <Authors>Christian Vogt</Authors>
+    <Company>holonsoft, Christian Vogt</Company>
+    <Copyright>Christian Vogt, holonsoft</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://www.nuget.org/packages/CsAvroGen</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>GIT</RepositoryType>
+    <RepositoryUrl>https://github.com/holonsoft/CsAvroGen</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="holonsoft.CmdLineParser" Version="2.1.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.5.0" />
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CsAvroGen.DomainModel\CsAvroGen.DomainModel.csproj" />
+    <ProjectReference Include="..\CsAvroGen.SelftestData\CsAvroGen.SelftestData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SelfTestingFrom.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
