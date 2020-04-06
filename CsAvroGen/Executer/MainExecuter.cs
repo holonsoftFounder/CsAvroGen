@@ -11,11 +11,11 @@ namespace holonsoft.CsAvroGen.Executer
             var ti = new TypeInspector();
 
 
-            if (!(string.IsNullOrWhiteSpace(prgArgs.AssemblyName) && string.IsNullOrWhiteSpace(prgArgs.TypeName)))
+            if (!(string.IsNullOrWhiteSpace(prgArgs.AssemblyName) || string.IsNullOrWhiteSpace(prgArgs.TypeName)))
             {
                 try
                 {
-                    ti.InspectCompiledType(prgArgs, typeInfoData);
+                    ti.InspectFileBasedCompiledType(prgArgs, typeInfoData);
                 }
                 catch (Exception ex)
                 {
@@ -39,7 +39,7 @@ namespace holonsoft.CsAvroGen.Executer
 
                     try
                     {
-                        ti.InspectCompiledType(typeInfoData);
+                        ti.InspectCompiledType(prgArgs, typeInfoData);
                     }
                     catch (Exception ex)
                     {

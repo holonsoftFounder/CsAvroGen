@@ -6,6 +6,7 @@ namespace holonsoft.CsAvroGen
 {
     class Program
     {
+
         static int Main(string[] args)
         {
             var p = new CommandLineParser<ProgramArgs>();

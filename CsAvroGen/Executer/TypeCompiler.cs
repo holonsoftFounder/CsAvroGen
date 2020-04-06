@@ -66,6 +66,7 @@ namespace holonsoft.CsAvroGen.Executer
                 MetadataReference.CreateFromFile(typeof(AvroDefaultValueAttribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Point).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location),
+                MetadataReference.CreateFromFile(@"C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\netstandard.dll"), 
             };
 
             return CSharpCompilation.Create("TypeInspectionOnly.dll",

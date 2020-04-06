@@ -2,6 +2,7 @@
 
 -an CsAvroGen.SelftestData.dll -tn SelfTesting -o ".\generated"
 
-Read
--f SelfTestingFrom.txt  -o ".\generated"
+
+Read file, compile it and process type
+-f SelfTestingFrom.txt  -tn SelfTestingFromText -o ".\generated"
 

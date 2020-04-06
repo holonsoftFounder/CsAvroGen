@@ -8,7 +8,7 @@ namespace holonsoft.CsAvroGen.Executer
 {
     internal class TypeInspector
     {
-        internal void InspectCompiledType(ProgramArgs prgArgs, TypeInfoData typeInfoData)
+        internal void InspectFileBasedCompiledType(ProgramArgs prgArgs, TypeInfoData typeInfoData)
         {
             if (!File.Exists(prgArgs.AssemblyName))
             {
@@ -16,10 +16,15 @@ namespace holonsoft.CsAvroGen.Executer
             }
 
             typeInfoData.FullAssemblyPath = Path.GetFullPath(prgArgs.AssemblyName);
-
             typeInfoData.Assembly = Assembly.LoadFile(typeInfoData.FullAssemblyPath);
+            
+            InspectCompiledType(prgArgs, typeInfoData);
+        }
 
 
+        
+        internal void InspectCompiledType(ProgramArgs prgArgs, TypeInfoData typeInfoData)
+        {
             foreach (var t in typeInfoData.Assembly.GetExportedTypes())
             {
                 if (!t.Name.Equals(prgArgs.TypeName)) continue;
@@ -33,12 +38,7 @@ namespace holonsoft.CsAvroGen.Executer
                 throw new TypeLoadException(prgArgs.TypeName);
             }
 
-            InspectCompiledType(typeInfoData);
-        }
-
-
-        internal void InspectCompiledType(TypeInfoData typeInfoData)
-        {
+            
             typeInfoData.Namespace = typeInfoData.InspectedType.Namespace;
             
             foreach (var field in typeInfoData.InspectedType.GetFields())
