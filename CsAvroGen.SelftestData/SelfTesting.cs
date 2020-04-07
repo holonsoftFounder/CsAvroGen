@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.AvroAttributes;
 
-
-namespace holonsoft.CsAvroGen.SelfTestData
+namespace CsAvroGen.SelftestData
 {
+    [AvroNamespace("ns.created.by.attribute")]
+    [AvroDoc("Test class composition for AVRO generation")]
     public class SelfTesting
     {
         public int? NullableIntField;
@@ -16,9 +17,11 @@ namespace holonsoft.CsAvroGen.SelfTestData
 
         public Dictionary<string, int> IntDictionary = new Dictionary<string, int>();
         public Dictionary<string, Point> PointDictionary = new Dictionary<string, Point>();
-
+        
         public Point PointField;
 
-        public SubclassSelfTesting SubclassSelfTesting;
+        public SubClass SubClassField;
+
+        public ImportantEnum EnumField;
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.AvroAttributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
@@ -13,16 +14,21 @@ namespace holonsoft.CsAvroGen.Executer
 {
     public class TypeCompiler
     {
+        private List<string> _usingList = new List<string>();
+        
+
         public void Compile(ProgramArgs prgArgs, TypeInfoData typeInfoData)
         {
-            if (!File.Exists(prgArgs.File))
-            {
-                throw new FileNotFoundException(prgArgs.File);
-            }
+            _usingList.Clear();
+        
 
-            var sourceCode = File.ReadAllText(prgArgs.File);
+            var sourceCode = LoadSourceCode(prgArgs.File);
 
-            
+            var u = _usingList.Distinct().Aggregate((i, j) => i + Environment.NewLine + j);
+
+            sourceCode = u + Environment.NewLine + sourceCode;
+
+
             using (var peStream = new MemoryStream())
             {
                 var result = GenerateCode(sourceCode, typeInfoData.MetadataReferenceList).Emit(peStream);
@@ -45,6 +51,52 @@ namespace holonsoft.CsAvroGen.Executer
 
                 typeInfoData.Assembly = Assembly.Load(peStream.ToArray());
             }
+        }
+
+
+        private string  LoadSourceCode(string sourceCodeFile)
+        {
+            sourceCodeFile = Path.GetFullPath(sourceCodeFile);
+
+            if (!File.Exists(sourceCodeFile))
+            {
+                throw new FileNotFoundException(sourceCodeFile);
+            }
+
+            var sb = new StringBuilder();
+
+
+            var listOfAdditionalFiles = new List<string>();
+
+            foreach (var sl in File.ReadLines(sourceCodeFile))
+            {
+                if (sl.Contains("using ", StringComparison.InvariantCulture))
+                {
+                    _usingList.Add(sl);
+                    continue;
+                }
+
+                if (sl.Contains("//@meta::include", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    var fileName = sl.Replace("//@meta::include", string.Empty, StringComparison.InvariantCultureIgnoreCase)
+                                            .Replace("\"", string.Empty, StringComparison.CurrentCultureIgnoreCase);
+
+                    fileName = Path.GetFileName(Path.GetFullPath(fileName));
+
+                    listOfAdditionalFiles.Add(Path.Combine(Path.GetDirectoryName(sourceCodeFile) ,fileName));
+                    continue;
+                }
+
+                sb.AppendLine(sl);
+            }
+
+
+            foreach (var fileName in listOfAdditionalFiles)
+            {
+                sb.AppendLine(LoadSourceCode(fileName));
+            }
+
+            return sb.ToString();
         }
 
 

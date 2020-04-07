@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+﻿//@meta::include ".\Subclass.txt"
+//@meta::include ".\SubSubclass.txt"
+//@meta::include ".\ImportantEnum.txt"
+
+
+using System.Collections.Generic;
 using System.Drawing;
-using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.AvroAttributes;
 
 namespace holonsoft.CsAvroGen.SelfTestData
 {
+    [AvroNamespace("ns.created.by.attribute")]
+    [AvroDoc("Test class composition for AVRO generation")]
     public class SelfTestingFromText
     {
         public int? NullableIntField;
@@ -16,26 +23,12 @@ namespace holonsoft.CsAvroGen.SelfTestData
         public Dictionary<string, int> IntDictionary = new Dictionary<string, int>();
         public Dictionary<string, Point> PointDictionary = new Dictionary<string, Point>();
 
+        
         public Point PointField;
 
         public Subclass SubclassField;
+
+        public ImportantEnum EnumField;
     }
-
-
-    public class Subclass
-    {
-        public double X;
-        public double Y;
-        public double Z;
-
-        public SubSubclass SubSubClassField;
-    }
-
-
-    public class SubSubclass
-    {
-        public double XX;
-        public double YY;
-        public double ZZ;
-    }
+    
 }

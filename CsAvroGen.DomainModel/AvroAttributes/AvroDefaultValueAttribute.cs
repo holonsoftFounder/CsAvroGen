@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CsAvroGen.DomainModel
+namespace CsAvroGen.DomainModel.AvroAttributes
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class AvroDefaultValueAttribute: Attribute

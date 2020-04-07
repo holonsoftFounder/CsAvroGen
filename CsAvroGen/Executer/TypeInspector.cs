@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.AvroAttributes;
 
 
 namespace holonsoft.CsAvroGen.Executer
@@ -46,6 +47,12 @@ namespace holonsoft.CsAvroGen.Executer
             if (!string.IsNullOrWhiteSpace(ns))
             {
                 typeInfoData.Namespace = ns;
+            }
+
+            var doc = typeInfoData.InspectedType.GetCustomAttribute<AvroDocAttribute>()?.DocValue;
+            if (!string.IsNullOrWhiteSpace(doc))
+            {
+                typeInfoData.DocValue = doc;
             }
 
 

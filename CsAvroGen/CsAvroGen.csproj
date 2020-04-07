@@ -39,7 +39,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SelfTestingFrom.txt">
+    <None Update="DemoFiles\ImportantEnum.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DemoFiles\SubSubClass.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DemoFiles\Subclass.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DemoFiles\SelfTestingFrom.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

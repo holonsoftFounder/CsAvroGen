@@ -1,0 +1,19 @@
+﻿using System.Collections.Generic;
+using System.Drawing;
+using CsAvroGen.DomainModel.AvroAttributes;
+
+namespace holonsoft.CsAvroGen.SelfTestData
+{
+    public class Subclass
+    {
+        public double X;
+        public double Y;
+        public double Z;
+
+        public ImportantEnum EnumFieldSub;
+
+        public SubSubclass SubSubClassField1;
+        public SubSubclass SubSubClassField2;
+    }
+
+}

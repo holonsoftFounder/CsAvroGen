@@ -1,6 +1,6 @@
 ﻿using holonsoft.CmdLineParser.DomainModel;
 
-namespace CsAvroGen.DomainModel
+namespace holonsoft.CsAvroGen
 {
     public class ProgramArgs
     {

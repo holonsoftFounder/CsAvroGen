@@ -1,0 +1,14 @@
+﻿using System.Collections.Generic;
+using System.Drawing;
+using CsAvroGen.DomainModel.AvroAttributes;
+
+namespace holonsoft.CsAvroGen.SelfTestData
+{   
+    public enum ImportantEnum
+    {
+        None,
+        A,
+        B,
+        C
+    }
+}

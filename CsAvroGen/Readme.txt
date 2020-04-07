@@ -4,5 +4,5 @@
 
 
 Read file, compile it and process type
--f SelfTestingFrom.txt  -tn SelfTestingFromText -o ".\generated"
+-f .\DemoFiles\SelfTestingFrom.txt  -tn SelfTestingFromText -o ".\generated"
 
