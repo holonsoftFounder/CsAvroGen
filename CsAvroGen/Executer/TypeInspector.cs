@@ -41,6 +41,14 @@ namespace holonsoft.CsAvroGen.Executer
             
             typeInfoData.Namespace = typeInfoData.InspectedType.Namespace;
             
+            var ns = typeInfoData.InspectedType.GetCustomAttribute<AvroNamespaceAttribute>()?.NamespaceValue;
+
+            if (!string.IsNullOrWhiteSpace(ns))
+            {
+                typeInfoData.Namespace = ns;
+            }
+
+
             foreach (var field in typeInfoData.InspectedType.GetFields())
             {
                 if (field.IsInitOnly || field.IsLiteral || field.IsStatic) continue;
@@ -48,7 +56,7 @@ namespace holonsoft.CsAvroGen.Executer
                 var efi = new ExtendedFieldInfo(field);
                 typeInfoData.FieldList.Add(efi);
 
-                if (efi.FieldInfo.FieldType.IsClass)
+                if (efi.IsClass && !(efi.IsArray || efi.IsMap))
                 {
                     AddSubFields(efi);
                 }
@@ -65,9 +73,9 @@ namespace holonsoft.CsAvroGen.Executer
                 var subEfi = new ExtendedFieldInfo(field);
                 efi.SubFieldList.Add(subEfi);
 
-                if (subEfi.FieldInfo.FieldType.IsClass)
+                if (subEfi.IsClass && !(subEfi.IsArray || subEfi.IsMap))
                 {
-                    AddSubFields(efi);
+                    AddSubFields(subEfi);
                 }
             }
         }

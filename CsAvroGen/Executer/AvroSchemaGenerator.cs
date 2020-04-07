@@ -57,7 +57,7 @@ namespace holonsoft.CsAvroGen.Executer
                             : typeInfoData.Namespace.ToDoubleQoutedString());
             _sb.AppendLine(", ");
 
-            var indent = 1;
+            var indent = 0;
 
             WriteRecord(typeInfoData.FieldList, indent + 1);
             
@@ -87,7 +87,7 @@ namespace holonsoft.CsAvroGen.Executer
 
         private void WriteRecord(IEnumerable<ExtendedFieldInfo> efi, int indent)
         {
-            _sb.Append(" ".Repeat(indent * _indentFactor));
+            _sb.Append(" ".Repeat(indent * (_indentFactor)));
             _sb.AppendLine("fields".ToDoubleQoutedString() + ": [");
 
             foreach (var extendedFieldInfo in efi)
@@ -95,6 +95,7 @@ namespace holonsoft.CsAvroGen.Executer
                 WriteFieldToAvro(extendedFieldInfo, indent + 1);
             }
 
+            _sb.AppendLine();
             _sb.Append(" ".Repeat(indent * _indentFactor));
             _sb.AppendLine("]");
 
@@ -108,7 +109,26 @@ namespace holonsoft.CsAvroGen.Executer
 
             var indentStr = " ".Repeat(indent * _indentFactor);
 
-            
+
+            if (extendedFieldInfo.IsArray)
+            {
+                //WriteArrayTypeInfo(indentStr, extendedFieldInfo, "");
+                return;
+            }
+
+            if (extendedFieldInfo.IsMap)
+            {
+                //WriteMapTypeInfo(indentStr, extendedFieldInfo, "");
+                return;
+            }
+
+            if (extendedFieldInfo.IsClass)
+            {
+                WriteClassTypeInfo(indent, extendedFieldInfo);
+                return;
+            }
+
+
             switch (extendedFieldInfo.TypeCode)
             {
                 // primitives
@@ -148,16 +168,37 @@ namespace holonsoft.CsAvroGen.Executer
                     return;
                 
             }
-
-            if (extendedFieldInfo.IsArray)
-            {
-                WriteArrayTypeInfo(indentStr, extendedFieldInfo, "");
-            }
         }
 
-        private void WriteArrayTypeInfo(string indentStr, ExtendedFieldInfo extendedFieldInfo, string empty)
+
+        private void WriteClassTypeInfo(int indent, ExtendedFieldInfo extendedFieldInfo)
         {
-            
+            var indentStr = " ".Repeat(indent * _indentFactor);
+
+            _sb.Append(indentStr);
+            _sb.Append("{ ");
+            _sb.Append("name".ToDoubleQoutedString() + ": ");
+            _sb.AppendLine(extendedFieldInfo.FieldName.ToDoubleQoutedString() + ", ");
+            _sb.Append(indentStr);
+            _sb.AppendLine("  " + "type".ToDoubleQoutedString() + ": { ");
+
+            indentStr = " ".Repeat(indent * (_indentFactor + 1));
+
+            _sb.Append(indentStr);
+            _sb.Append("type".ToDoubleQoutedString() + ": ");
+            _sb.AppendLine("record".ToDoubleQoutedString() + ", ");
+            _sb.Append(indentStr);
+            _sb.Append("name".ToDoubleQoutedString() + ": ");
+            _sb.AppendLine(extendedFieldInfo.ImplementingClassName.ToDoubleQoutedString() + ", ");
+
+            WriteRecord(extendedFieldInfo.SubFieldList, indent + 1);
+
+            _sb.Append(indentStr);
+            _sb.AppendLine("} ");
+
+            indentStr = " ".Repeat(indent * _indentFactor);
+            _sb.Append(indentStr);
+            _sb.AppendLine("} ");
         }
 
 

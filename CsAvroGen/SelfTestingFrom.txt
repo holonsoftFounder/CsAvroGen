@@ -2,7 +2,6 @@
 using System.Drawing;
 using CsAvroGen.DomainModel;
 
-
 namespace holonsoft.CsAvroGen.SelfTestData
 {
     public class SelfTestingFromText
@@ -19,14 +18,24 @@ namespace holonsoft.CsAvroGen.SelfTestData
 
         public Point PointField;
 
-        public SubclassSelfTesting SubclassSelfTesting;
+        public Subclass SubclassField;
     }
 
 
-    public class SubclassSelfTesting
+    public class Subclass
     {
         public double X;
         public double Y;
         public double Z;
+
+        public SubSubclass SubSubClassField;
+    }
+
+
+    public class SubSubclass
+    {
+        public double XX;
+        public double YY;
+        public double ZZ;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,11 +22,10 @@ namespace holonsoft.CsAvroGen.Executer
 
             var sourceCode = File.ReadAllText(prgArgs.File);
 
-
             
             using (var peStream = new MemoryStream())
             {
-                var result = GenerateCode(sourceCode).Emit(peStream);
+                var result = GenerateCode(sourceCode, typeInfoData.MetadataReferenceList).Emit(peStream);
 
                 if (!result.Success)
                 {
@@ -47,27 +47,31 @@ namespace holonsoft.CsAvroGen.Executer
             }
         }
 
+
+        // Thanks to
         // https://laurentkempe.com/2019/02/18/dynamically-compile-and-run-code-using-dotNET-Core-3.0/
         // https://josephwoodward.co.uk/2016/12/in-memory-c-sharp-compilation-using-roslyn
 
-        private CSharpCompilation GenerateCode(string sourceCode)
+        private CSharpCompilation GenerateCode(string sourceCode, List<MetadataReference> metadataReferenceList)
         {
             var codeString = SourceText.From(sourceCode);
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Default);
 
             var parsedSyntaxTree = SyntaxFactory.ParseSyntaxTree(codeString, options);
 
-            var references = new MetadataReference[]
+            var references = new List<MetadataReference>
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(System.Runtime.AssemblyTargetedPatchBandAttribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(AvroDefaultValueAttribute).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(Point).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location),
-                MetadataReference.CreateFromFile(@"C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\netstandard.dll"), 
+                MetadataReference.CreateFromFile(typeof(Array).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(List<>).Assembly.Location),
             };
+
+            references.AddRange(metadataReferenceList);
 
             return CSharpCompilation.Create("TypeInspectionOnly.dll",
                 new[] { parsedSyntaxTree },

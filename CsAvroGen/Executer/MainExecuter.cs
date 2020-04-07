@@ -10,6 +10,8 @@ namespace holonsoft.CsAvroGen.Executer
             var typeInfoData = new TypeInfoData();
             var ti = new TypeInspector();
 
+            new ConfigReader().Read(typeInfoData);
+
 
             if (!(string.IsNullOrWhiteSpace(prgArgs.AssemblyName) || string.IsNullOrWhiteSpace(prgArgs.TypeName)))
             {
