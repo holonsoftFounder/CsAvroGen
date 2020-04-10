@@ -45,6 +45,9 @@ namespace holonsoft.CsAvroGen.Generator
                     case AvroFieldType.String:
                         WritePrimitiveTypeInfo(efi, "string");
                         return;
+                    case AvroFieldType.Fixed:
+                        WriteFixedField(efi);
+                        break;
                     default:
                         throw new NotSupportedException("type of " + efi.FieldName + " not supported");
                 }
@@ -55,6 +58,7 @@ namespace holonsoft.CsAvroGen.Generator
             }
         }
 
+       
 
         private void WriteDefaultValue(ExtendedFieldInfo extendedFieldInfo)
         {

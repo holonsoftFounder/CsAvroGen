@@ -28,6 +28,9 @@ namespace CsAvroGen.DomainModel
         public string AvroNameSpace { get; set; }
         public string AvroDocValue { get; set; }
         public object AvroDefaultValue { get; set; }
+        public int FixedFieldSize { get; set; }
+        public string FixedFieldClassName { get; set; }
+
         public List<string> AliasList { get; } = new List<string>();
 
         public Type ComplexArrayOrMapType { get; set; }

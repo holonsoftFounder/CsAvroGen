@@ -97,6 +97,26 @@ namespace holonsoft.CsAvroGen.Executer
             efi.HasDefaultValue = efi.AvroDefaultValue != null;
 
 
+            var fsAttr = efi.FieldInfo.GetCustomAttribute<AvroFixedAttribute>();
+            if (fsAttr != null)
+            {
+                efi.AvroType = AvroFieldType.Fixed;
+                efi.FixedFieldSize = fsAttr.Size;
+                efi.FixedFieldClassName = fsAttr.DataClassName;
+
+                if (efi.TypeCode != TypeCode.Byte)
+                {
+                    throw new NotSupportedException("fixed is not allowed for other types than BYTE, field: " + efi.FieldName);
+                }
+
+                if (string.IsNullOrWhiteSpace(efi.FixedFieldClassName))
+                {
+                    throw new ArgumentException("You must provide a DataClassName via attriute, field: " + efi.FieldName);
+                }
+            }
+
+
+
             var aliasAttr = efi.FieldInfo.GetCustomAttribute<AvroAliasAttribute>()?.AliasList;
 
             if (aliasAttr != null)

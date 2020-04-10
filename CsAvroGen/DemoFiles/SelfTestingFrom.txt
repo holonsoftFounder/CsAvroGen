@@ -35,6 +35,9 @@ namespace holonsoft.CsAvroGen.SelfTestData
 		public double DoubleField;
 		
 		public string StringField;
+		
+		[AvroFixed("FixedData1", 16)]
+		public byte[] FixedField;
 	}
     
 
@@ -42,6 +45,9 @@ namespace holonsoft.CsAvroGen.SelfTestData
     {
         public int MCTIntField1;
         public int MCTIntField2;
+		
+		[AvroFixed("FixedData2", 32)]
+		public byte[] FixedField;
     }
 
 }
