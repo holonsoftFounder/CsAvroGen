@@ -1,5 +1,4 @@
-﻿using CsAvroGen.DomainModel;
-using holonsoft.CmdLineParser;
+﻿using holonsoft.CmdLineParser;
 using holonsoft.CsAvroGen.Executer;
 
 namespace holonsoft.CsAvroGen

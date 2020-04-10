@@ -4,17 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using CsAvroGen.DomainModel;
-using CsAvroGen.DomainModel.AvroAttributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
+using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.AvroAttributes;
 
 namespace holonsoft.CsAvroGen.Executer
 {
     public class TypeCompiler
     {
-        private List<string> _usingList = new List<string>();
+        private readonly List<string> _usingList = new List<string>();
         
 
         public void Compile(ProgramArgs prgArgs, TypeInfoData typeInfoData)

@@ -18,17 +18,30 @@ namespace holonsoft.CsAvroGen.SelfTestData
         [AvroDefaultValue(5)]
         public int IntField;
 
+		public long LongField;
+
         public int[] IntArray;
+        public MyComplexType[] ComplexTypeArray;
 
         public Dictionary<string, int> IntDictionary = new Dictionary<string, int>();
-        public Dictionary<string, Point> PointDictionary = new Dictionary<string, Point>();
+        public Dictionary<string, MyComplexType> ComplexDictionary = new Dictionary<string, MyComplexType>();
 
-        
-        public Point PointField;
 
         public Subclass SubclassField;
 
         public ImportantEnum EnumField;
-    }
+		
+		public float FloatField;
+		public double DoubleField;
+		
+		public string StringField;
+	}
     
+
+    public class MyComplexType
+    {
+        public int MCTIntField1;
+        public int MCTIntField2;
+    }
+
 }

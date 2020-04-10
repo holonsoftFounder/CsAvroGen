@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 using CsAvroGen.DomainModel;
 
@@ -12,7 +13,11 @@ namespace holonsoft.CsAvroGen.Executer
         {
             typeInfoData.IndentFactor = 2;
 
-            if (!File.Exists(@".\CsAvroGen.dll.config")) return;
+            var configFileName = Assembly.GetEntryAssembly().Location + ".config";
+
+            if (!File.Exists(configFileName)) return;
+
+            Console.WriteLine("Reading config from " + configFileName);
 
             foreach (var key in ConfigurationManager.AppSettings.AllKeys)
             {

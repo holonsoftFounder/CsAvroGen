@@ -15,7 +15,7 @@ namespace holonsoft.CsAvroGen.Generator
                 _sb.Append(extendedFieldInfo.FieldName.ToDoubleQoutedString() + ", ");
                 _sb.Append("type".ToDoubleQoutedString() + ":  ");
                 _sb.Append(extendedFieldInfo.FieldInfo.FieldType.Name.ToDoubleQoutedString());
-                _sb.AppendLine(" }");
+                _sb.AppendLine(" }, ");
                 return;
             }
 

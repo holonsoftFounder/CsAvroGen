@@ -9,6 +9,9 @@ namespace holonsoft.CsAvroGen.Executer
 {
     internal class TypeInspector
     {
+        private readonly FieldInspector _fieldInspector = new FieldInspector();
+
+
         internal void InspectFileBasedCompiledType(ProgramArgs prgArgs, TypeInfoData typeInfoData)
         {
             if (!File.Exists(prgArgs.AssemblyName))
@@ -63,6 +66,8 @@ namespace holonsoft.CsAvroGen.Executer
                 var efi = new ExtendedFieldInfo(field);
                 typeInfoData.FieldList.Add(efi);
 
+                _fieldInspector.Inspect(efi);
+
                 if (efi.IsClass && !(efi.IsArray || efi.IsMap))
                 {
                     AddSubFields(efi);
@@ -79,6 +84,8 @@ namespace holonsoft.CsAvroGen.Executer
 
                 var subEfi = new ExtendedFieldInfo(field);
                 efi.SubFieldList.Add(subEfi);
+
+                _fieldInspector.Inspect(subEfi);
 
                 if (subEfi.IsClass && !(subEfi.IsArray || subEfi.IsMap))
                 {

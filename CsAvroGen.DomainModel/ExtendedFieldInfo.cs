@@ -9,22 +9,25 @@ namespace CsAvroGen.DomainModel
     {
         public FieldInfo FieldInfo { get; }
         public string FieldName => FieldInfo.Name;
-        
-        public TypeCode TypeCode { get; }
-        public bool HasDefaultValue { get; }
-        public bool HasDocValue { get; }
 
-        public bool IsNullable { get; }
-        public bool IsMap { get; }
+        public AvroFieldType AvroType { get; set; } = AvroFieldType.Undefined;
+
+        public TypeCode TypeCode { get; set; }
+        public bool HasDefaultValue { get; set; }
+        public bool HasDocValue { get; set; }
+        public bool HasNamespace { get; set; }
+
+        public bool IsNullable { get; set; }
+        public bool IsMap { get; set; }
         public bool IsArray => FieldInfo.FieldType.IsArray;
         public bool IsClass => FieldInfo.FieldType.IsClass;
         public bool HasAlias => AliasList.Count > 0;
 
+        public string ImplementingClassName { get; set; }
 
-        public string ImplementingClassName { get; }
-
-        public string AvroDocValue { get; }
-        public object AvroDefaultValue { get; }
+        public string AvroNameSpace { get; set; }
+        public string AvroDocValue { get; set; }
+        public object AvroDefaultValue { get; set; }
         public List<string> AliasList { get; } = new List<string>();
 
 
@@ -33,61 +36,6 @@ namespace CsAvroGen.DomainModel
         public ExtendedFieldInfo(FieldInfo fi)
         {
             FieldInfo = fi;
-            
-            var fieldType = FieldInfo.FieldType;
-            TypeCode = Type.GetTypeCode(fieldType);
-
-            if (fieldType.IsGenericType && fieldType.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                var t = Nullable.GetUnderlyingType(fieldType);
-
-                if (t != null)
-                {
-                    TypeCode = Type.GetTypeCode(t);
-                    IsNullable = true;
-                }
-            }
-
-            if (fieldType.IsArray)
-            {
-                TypeCode = Type.GetTypeCode(fieldType.GetElementType());
-            }
-
-
-            if (fieldType.IsGenericType)
-            {
-                var underlyingName = fieldType.UnderlyingSystemType.Name;
-
-                IsMap = underlyingName.Contains("Dictionary", StringComparison.InvariantCultureIgnoreCase)
-                        || underlyingName.Contains("SortedList", StringComparison.InvariantCultureIgnoreCase)
-                        || underlyingName.Contains("SortedDictionary", StringComparison.InvariantCultureIgnoreCase);
-            }
-
-            if (fieldType.IsClass)
-            {
-                ImplementingClassName = fieldType.Name;
-            }
-            
-
-            AvroDefaultValue = fi.GetCustomAttribute<AvroDefaultValueAttribute>()?.DefaultValue;
-            HasDefaultValue = AvroDefaultValue != null;
-
-
-            var aliasAttr = fi.GetCustomAttribute<AvroAliasAttribute>()?.AliasList;
-
-            if (aliasAttr != null)
-            {
-                AliasList.AddRange(aliasAttr);
-            }
-
-
-            var docValueAttr = fi.GetCustomAttribute<AvroDocAttribute>()?.DocValue;
-
-            if (!string.IsNullOrWhiteSpace(docValueAttr))
-            {
-                AvroDocValue = docValueAttr;
-                HasDocValue = true;
-            }
         }
     }
 }

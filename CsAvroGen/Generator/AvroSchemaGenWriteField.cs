@@ -5,79 +5,73 @@ namespace holonsoft.CsAvroGen.Generator
 {
     internal partial class AvroSchemaGenerator
     {
-        private void WriteFieldToAvro(ExtendedFieldInfo extendedFieldInfo)
+        private void WriteFieldToAvro(ExtendedFieldInfo efi)
         {
             _indentProvider.IncLevel();
 
             try
             {
-                // https://avro.apache.org/docs/current/spec.html#schema_primitive
-
-
-                if (extendedFieldInfo.IsArray)
+                switch (efi.AvroType)
                 {
-                    //WriteArrayTypeInfo(indentStr, extendedFieldInfo, "");
-                    return;
-                }
-
-                if (extendedFieldInfo.IsMap)
-                {
-                    //WriteMapTypeInfo(indentStr, extendedFieldInfo, "");
-                    return;
-                }
-
-                if (extendedFieldInfo.IsClass)
-                {
-                    WriteClassTypeInfo(extendedFieldInfo);
-                    return;
-                }
-
-
-                switch (extendedFieldInfo.TypeCode)
-                {
-                    // primitives
-                    case TypeCode.Empty:
+                    case AvroFieldType.Array:
+                    case AvroFieldType.ArrayWithRecordType:
+                        WriteArrayTypeInfo(efi);
                         break;
-                    case TypeCode.Boolean:
-                        WritePrimitiveTypeInfo(extendedFieldInfo, "boolean");
+                    case AvroFieldType.Map:
+                    case AvroFieldType.MapWithRecordType:
+                        WriteMapTypeInfo(efi);
+                        break;
+                    case AvroFieldType.Record:
+                        WriteClassTypeInfo(efi);
+                        break;
+                    case AvroFieldType.Enum:
+                        WriteEnumTypeInfo(efi);
+                        break;
+                    case AvroFieldType.Boolean:
+                        WritePrimitiveTypeInfo(efi, "boolean");
                         return;
-                    case TypeCode.Int64:
-                        WritePrimitiveTypeInfo(extendedFieldInfo, "long");
+                    case AvroFieldType.Int:
+                        WritePrimitiveTypeInfo(efi, "int");
+                        break;
+                    case AvroFieldType.Long:
+                        WritePrimitiveTypeInfo(efi, "long");
                         return;
-                    case TypeCode.Single:
-                        WritePrimitiveTypeInfo(extendedFieldInfo, "float");
+                    case AvroFieldType.Float:
+                        WritePrimitiveTypeInfo(efi, "float");
                         return;
-                    case TypeCode.Double:
-                        WritePrimitiveTypeInfo(extendedFieldInfo, "double");
+                    case AvroFieldType.Double:
+                        WritePrimitiveTypeInfo(efi, "double");
                         return;
-                    case TypeCode.String:
-                        WritePrimitiveTypeInfo(extendedFieldInfo, "string");
+                    case AvroFieldType.String:
+                        WritePrimitiveTypeInfo(efi, "string");
                         return;
-
-                    // primitives or complex if enum
-                    case TypeCode.Int32:
-                        if (extendedFieldInfo.FieldInfo.FieldType.BaseType == typeof(Enum))
-                        {
-                            WriteEnumTypeInfo(extendedFieldInfo);
-                        }
-                        else
-                        {
-                            WritePrimitiveTypeInfo(extendedFieldInfo, "int");
-                        }
-                        return;
-
-                    // logical type
-                    case TypeCode.Decimal:
-
-                        return;
-
+                    default:
+                        throw new NotSupportedException("type of " + efi.FieldName + " not supported");
                 }
             }
             finally
             {
                 _indentProvider.DecLevel();
             }
+        }
 
+
+        private void WriteDefaultValue(ExtendedFieldInfo extendedFieldInfo)
+        {
+            if (!extendedFieldInfo.HasDefaultValue) return;
+
+            _sb.Append(", " + "default".ToDoubleQoutedString() + ": " +
+                       (extendedFieldInfo.TypeCode == TypeCode.String
+                           ? extendedFieldInfo.AvroDefaultValue.ToString().ToDoubleQoutedString()
+                           : extendedFieldInfo.AvroDefaultValue));
+        }
+
+
+        private void WriteDocValue(ExtendedFieldInfo extendedFieldInfo)
+        {
+            if (!extendedFieldInfo.HasDocValue) return;
+
+            _sb.Append(", " + "doc".ToDoubleQoutedString() + ": " + extendedFieldInfo.AvroDocValue.ToDoubleQoutedString());
         }
     }
 }

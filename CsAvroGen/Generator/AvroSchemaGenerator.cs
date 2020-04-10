@@ -107,24 +107,5 @@ namespace holonsoft.CsAvroGen.Generator
 
         }
         
-
-        private void WriteDefaultValue(ExtendedFieldInfo extendedFieldInfo)
-        {
-            if (!extendedFieldInfo.HasDefaultValue) return;
-
-            _sb.Append(", " + "default".ToDoubleQoutedString() + ": " +
-                       (extendedFieldInfo.TypeCode == TypeCode.String
-                           ? extendedFieldInfo.AvroDefaultValue.ToString().ToDoubleQoutedString()
-                           : extendedFieldInfo.AvroDefaultValue));
-        }
-
-
-        private void WriteDocValue(ExtendedFieldInfo extendedFieldInfo)
-        {
-            if (!extendedFieldInfo.HasDocValue) return;
-
-            _sb.Append(", " + "doc".ToDoubleQoutedString() + ": " + extendedFieldInfo.AvroDocValue);
-        }
-
     }
 }
