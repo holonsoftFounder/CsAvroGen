@@ -4,16 +4,16 @@ namespace holonsoft.CsAvroGen.Generator
 {
     internal partial class AvroSchemaGenerator
     {
-        private void WriteClassTypeInfo(ExtendedFieldInfo extendedFieldInfo)
+        private void WriteClassTypeInfo(ExtendedFieldInfo efi, bool needTypeString = true)
         {
-            if (_generatedTypes.Contains(extendedFieldInfo.ImplementingClassName))
+            if (_generatedTypes.Contains(efi.ImplementingClassName))
             {
                 _sb.Append(_indentProvider.Get());
                 _sb.Append("{ ");
                 _sb.Append("name".ToDoubleQoutedString() + ": ");
-                _sb.Append(extendedFieldInfo.FieldName.ToDoubleQoutedString() + ", ");
+                _sb.Append(efi.FieldName.ToDoubleQoutedString() + ", ");
                 _sb.Append("type".ToDoubleQoutedString() + ":  ");
-                _sb.Append(extendedFieldInfo.ImplementingClassName.ToDoubleQoutedString());
+                _sb.Append(efi.ImplementingClassName.ToDoubleQoutedString());
                 _sb.AppendLine(" }");
 
                 return;
@@ -23,10 +23,18 @@ namespace holonsoft.CsAvroGen.Generator
             {
                 _sb.Append(_indentProvider.Get());
                 _sb.Append("{ ");
-                _sb.Append("name".ToDoubleQoutedString() + ": ");
-                _sb.AppendLine(extendedFieldInfo.FieldName.ToDoubleQoutedString() + ", ");
+
+                if (needTypeString)
+                {
+                    _sb.Append("name".ToDoubleQoutedString() + ": ");
+                    _sb.AppendLine(efi.FieldName.ToDoubleQoutedString() + ", ");
+                }
                 _sb.Append(_indentProvider.Get());
-                _sb.AppendLine("  " + "type".ToDoubleQoutedString() + ": { ");
+
+                if (needTypeString)
+                {
+                    _sb.AppendLine("  " + "type".ToDoubleQoutedString() + ": { ");
+                }
 
                 _indentProvider.IncLevel();
                 _indentProvider.IncLevel();
@@ -36,9 +44,9 @@ namespace holonsoft.CsAvroGen.Generator
                 _sb.AppendLine("record".ToDoubleQoutedString() + ", ");
                 _sb.Append(_indentProvider.Get());
                 _sb.Append("name".ToDoubleQoutedString() + ": ");
-                _sb.AppendLine(extendedFieldInfo.ImplementingClassName.ToDoubleQoutedString() + ", ");
+                _sb.AppendLine(efi.ImplementingClassName.ToDoubleQoutedString() + ", ");
 
-                WriteRecord(extendedFieldInfo.SubFieldList);
+                WriteRecord(efi.SubFieldList);
 
                 _sb.Append(_indentProvider.Get());
                 _sb.AppendLine("} ");
@@ -46,7 +54,7 @@ namespace holonsoft.CsAvroGen.Generator
                 _sb.Append(_indentProvider.Get());
                 _sb.AppendLine("}, ");
 
-                _generatedTypes.Add(extendedFieldInfo.ImplementingClassName);
+                _generatedTypes.Add(efi.ImplementingClassName);
             }
             finally
             {

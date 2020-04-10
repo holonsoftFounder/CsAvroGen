@@ -29,7 +29,7 @@ namespace holonsoft.CsAvroGen.Generator
                     }
                     break;
                 case AvroFieldType.ArrayWithRecordType:
-                    //WriteArrayType(efi, string.Empty);
+                    WriteArrayType(efi, string.Empty);
                     break;
                 default:
                     throw new NotSupportedException("type of " + efi.FieldName + " as array not supported");
@@ -53,20 +53,30 @@ namespace holonsoft.CsAvroGen.Generator
             _sb.Append("type".ToDoubleQoutedString() + ": " + "array".ToDoubleQoutedString() + ", ");
             _sb.Append("items".ToDoubleQoutedString() + ": ");
 
-            if (efi.AvroType == AvroFieldType.Array)
+            if (efi.AvroType == AvroFieldType.Array || _generatedTypes.Contains(efi.ImplementingClassName))
             {
-                _sb.Append(typeName.ToDoubleQoutedString() + " }");
+                var s = string.IsNullOrWhiteSpace(typeName) ? efi.ImplementingClassName : typeName;
+
+                _sb.Append(s.ToDoubleQoutedString() + " }");
             }
             else
             {
-                WriteClassTypeInfo(efi);
+                _indentProvider.DecLevel();
+                _indentProvider.DecLevel();
+                _sb.AppendLine();
+
+                WriteClassTypeInfo(efi, false);
+                _sb.Append(_indentProvider.Get());
+                //_sb.AppendLine("}, ");
+
+                _indentProvider.IncLevel();
+                _indentProvider.IncLevel();
             }
 
             _indentProvider.DecLevel();
             _indentProvider.DecLevel();
-            _sb.Append("}, ");
-
-            _sb.AppendLine();
+            _sb.Append(_indentProvider.Get());
+            _sb.AppendLine("}, ");
         }
     }
 }

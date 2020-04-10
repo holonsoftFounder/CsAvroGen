@@ -30,6 +30,7 @@ namespace CsAvroGen.DomainModel
         public object AvroDefaultValue { get; set; }
         public List<string> AliasList { get; } = new List<string>();
 
+        public Type ComplexArrayOrMapType { get; set; }
 
         public List<ExtendedFieldInfo> SubFieldList { get; } = new List<ExtendedFieldInfo>();
 

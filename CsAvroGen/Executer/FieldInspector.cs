@@ -71,6 +71,9 @@ namespace holonsoft.CsAvroGen.Executer
                     if (efi.TypeCode == TypeCode.Object)
                     {
                         efi.AvroType = AvroFieldType.MapWithRecordType;
+
+                        efi.ComplexArrayOrMapType = fieldType.GenericTypeArguments[1];
+                        efi.ImplementingClassName = efi.ComplexArrayOrMapType.Name;
                     }
 
                 }
@@ -84,6 +87,8 @@ namespace holonsoft.CsAvroGen.Executer
                 if (efi.TypeCode == TypeCode.Object)
                 {
                     efi.AvroType = AvroFieldType.ArrayWithRecordType;
+
+                    efi.ComplexArrayOrMapType = fieldType.GetElementType();
                 }
             }
 
@@ -122,19 +127,13 @@ namespace holonsoft.CsAvroGen.Executer
 
         }
 
-        private static void SetTypeCodeForPrimitives(ExtendedFieldInfo efi)
+
+        private void SetTypeCodeForPrimitives(ExtendedFieldInfo efi)
         {
             switch (efi.TypeCode)
             {
                 case TypeCode.Int32:
-                    if (efi.FieldInfo.FieldType.BaseType == typeof(Enum))
-                    {
-                        efi.AvroType = AvroFieldType.Enum;
-                    }
-                    else
-                    {
-                        efi.AvroType = AvroFieldType.Int;
-                    }
+                    efi.AvroType = efi.FieldInfo.FieldType.BaseType == typeof(Enum) ? AvroFieldType.Enum : AvroFieldType.Int;
                     break;
                 case TypeCode.Int64:
                     efi.AvroType = AvroFieldType.Long;

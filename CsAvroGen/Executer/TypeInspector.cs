@@ -68,7 +68,7 @@ namespace holonsoft.CsAvroGen.Executer
 
                 _fieldInspector.Inspect(efi);
 
-                if (efi.IsClass && !(efi.IsArray || efi.IsMap))
+                if (efi.AvroType == AvroFieldType.Record || efi.AvroType == AvroFieldType.ArrayWithRecordType || efi.AvroType == AvroFieldType.MapWithRecordType)
                 {
                     AddSubFields(efi);
                 }
@@ -78,7 +78,12 @@ namespace holonsoft.CsAvroGen.Executer
 
         private void AddSubFields(ExtendedFieldInfo efi)
         {
-            foreach (var field in efi.FieldInfo.FieldType.GetFields())
+
+            var fields = efi.AvroType == AvroFieldType.Record ? efi.FieldInfo.FieldType.GetFields() : efi.ComplexArrayOrMapType?.GetFields();
+
+            if (fields == null) return;
+
+            foreach (var field in fields)
             {
                 if (field.IsInitOnly || field.IsLiteral || field.IsStatic) continue;
 
@@ -87,7 +92,7 @@ namespace holonsoft.CsAvroGen.Executer
 
                 _fieldInspector.Inspect(subEfi);
 
-                if (subEfi.IsClass && !(subEfi.IsArray || subEfi.IsMap))
+                if (subEfi.AvroType == AvroFieldType.Record || efi.AvroType == AvroFieldType.ArrayWithRecordType || efi.AvroType == AvroFieldType.MapWithRecordType)
                 {
                     AddSubFields(subEfi);
                 }
