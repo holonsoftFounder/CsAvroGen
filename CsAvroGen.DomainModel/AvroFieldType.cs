@@ -10,7 +10,6 @@
         Long,
         Float,
         Double,
-        Bytes,
         String,
 
         Record,
@@ -23,6 +22,7 @@
         MapWithRecordType,
 
         Fixed,
+
         Logical,
     }
 }

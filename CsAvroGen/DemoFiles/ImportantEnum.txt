@@ -4,6 +4,7 @@ using CsAvroGen.DomainModel.AvroAttributes;
 
 namespace holonsoft.CsAvroGen.SelfTestData
 {   
+    //[AvroDoc("A very important enumeration")]
     public enum ImportantEnum
     {
         None,

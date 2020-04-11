@@ -4,15 +4,20 @@ using CsAvroGen.DomainModel.AvroAttributes;
 
 namespace holonsoft.CsAvroGen.SelfTestData
 {
+    [AvroDoc("Subclass / record defined in an own file")]
     public class Subclass
     {
         public double X;
         public double Y;
         public double Z;
 
+        [AvroDoc("And here we have a reusage of a well known type, in terms we have already used it for this schema template")]
         public ImportantEnum EnumFieldSub;
 
+        [AvroDoc("nested record, share type with 2nd field")]
         public SubSubclass SubSubClassField1;
+
+        [AvroDoc("nested record, share type with 1st field")]
         public SubSubclass SubSubClassField2;
     }
 

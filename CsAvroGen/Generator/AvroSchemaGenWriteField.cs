@@ -29,22 +29,22 @@ namespace holonsoft.CsAvroGen.Generator
                         break;
                     case AvroFieldType.Boolean:
                         WritePrimitiveTypeInfo(efi, "boolean");
-                        return;
+                        break;
                     case AvroFieldType.Int:
                         WritePrimitiveTypeInfo(efi, "int");
                         break;
                     case AvroFieldType.Long:
                         WritePrimitiveTypeInfo(efi, "long");
-                        return;
+                        break;
                     case AvroFieldType.Float:
                         WritePrimitiveTypeInfo(efi, "float");
-                        return;
+                        break;
                     case AvroFieldType.Double:
                         WritePrimitiveTypeInfo(efi, "double");
-                        return;
+                        break;
                     case AvroFieldType.String:
                         WritePrimitiveTypeInfo(efi, "string");
-                        return;
+                        break;
                     case AvroFieldType.Fixed:
                         WriteFixedField(efi);
                         break;
@@ -71,11 +71,18 @@ namespace holonsoft.CsAvroGen.Generator
         }
 
 
-        private void WriteDocValue(ExtendedFieldInfo extendedFieldInfo)
+        private bool WriteDocValue(ExtendedFieldInfo extendedFieldInfo, bool appendComma = false)
         {
-            if (!extendedFieldInfo.HasDocValue) return;
+            if (!extendedFieldInfo.HasDocValue) return false;
 
             _sb.Append(", " + "doc".ToDoubleQoutedString() + ": " + extendedFieldInfo.AvroDocValue.ToDoubleQoutedString());
+
+            if (appendComma)
+            {
+                _sb.Append(", ");
+            }
+
+            return true;
         }
     }
 }

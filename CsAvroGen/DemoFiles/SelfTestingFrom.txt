@@ -1,4 +1,9 @@
-﻿//@meta::include ".\Subclass.txt"
+﻿// Main template file for AVRO schema generation
+//
+// Include other files to get the complete source code
+// You can either define al in one file or split it to an arbitrary count of files
+//
+//@meta::include ".\Subclass.txt"
 //@meta::include ".\SubSubclass.txt"
 //@meta::include ".\ImportantEnum.txt"
 
@@ -13,34 +18,50 @@ namespace holonsoft.CsAvroGen.SelfTestData
     [AvroDoc("Test class composition for AVRO generation")]
     public class SelfTestingFromText
     {
+        [AvroDoc("Field can be null, so we get a AVRO UNION")]
         public int? NullableIntField;
 
+        [AvroDoc("This field has a default value")]
         [AvroDefaultValue(5)]
         public int IntField;
 
+        [AvroDoc("Simple AVRO long")]
 		public long LongField;
 
+        [AvroDoc("Simple AVRO array")]
         public int[] IntArray;
+
+        [AvroDoc("AVRO array with record as element type")]
         public MyComplexType[] ComplexTypeArray;
 
+        [AvroDoc("Simple AVRO map, key must be of string type")]
         public Dictionary<string, int> IntDictionary = new Dictionary<string, int>();
+
+        [AvroDoc("AVRO array with record element type, key must be of string type")]
         public Dictionary<string, MyComplexType> ComplexDictionary = new Dictionary<string, MyComplexType>();
 
-
+        [AvroDoc("Let's create a subclass = AVRO record")]
         public Subclass SubclassField;
 
+        [AvroDoc("Support for enums is implemented, too")]
         public ImportantEnum EnumField;
 		
+        [AvroDoc("Simple AVRO float")]
 		public float FloatField;
+
+        [AvroDoc("Simple AVRO double")]
 		public double DoubleField;
-		
+
+        [AvroDoc("Simple AVRO string")]		
 		public string StringField;
 		
+        [AvroDoc("Special byte field with fixed length")]
 		[AvroFixed("FixedData1", 16)]
 		public byte[] FixedField;
 	}
     
 
+    [AvroDoc("This class is defined in same file as main class")]
     public class MyComplexType
     {
         public int MCTIntField1;

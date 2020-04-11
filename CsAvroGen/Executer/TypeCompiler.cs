@@ -39,7 +39,7 @@ namespace holonsoft.CsAvroGen.Executer
 
                     foreach (var diagnostic in failures)
                     {
-                        Console.Error.WriteLine("{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
+                        Console.Error.WriteLine("{0}: {1} at {2}", diagnostic.Id, diagnostic.GetMessage(), diagnostic.Location);
                     }
 
                     throw new Exception("Compilation failed");

@@ -4,12 +4,14 @@ using CsAvroGen.DomainModel.AvroAttributes;
 
 namespace holonsoft.CsAvroGen.SelfTestData
 {
+    [AvroDoc("record, it's type will be used more than once in schema")]
     public class SubSubclass
     {
         public double XX;
         public double YY;
         public double ZZ;
 
+        [AvroDoc("And again a well known type")]
         public ImportantEnum EnumFieldSubSub;
     }
 }

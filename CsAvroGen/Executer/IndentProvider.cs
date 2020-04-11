@@ -29,6 +29,12 @@ namespace holonsoft.CsAvroGen.Executer
         }
 
 
+        public void Reset()
+        {
+            _index = 0;
+        }
+
+
         public void IncLevel()
         {
             _index++;

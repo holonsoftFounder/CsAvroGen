@@ -41,9 +41,12 @@ namespace holonsoft.CsAvroGen.Generator
         {
             _sb.Append(_indentProvider.Get());
             _sb.Append("{ ");
-            WriteDocValue(efi);
             _sb.Append("name".ToDoubleQoutedString() + ": ");
-            _sb.Append(efi.FieldName.ToDoubleQoutedString() + ", ");
+            _sb.Append(efi.FieldName.ToDoubleQoutedString());
+            if (!WriteDocValue(efi, true))
+            {
+                _sb.Append(", " );
+            }
 
             _sb.AppendLine("type".ToDoubleQoutedString() + ": {");
             

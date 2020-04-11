@@ -80,12 +80,9 @@ namespace holonsoft.CsAvroGen.Generator
             
             _sb.AppendLine("}");
 
-            var outFile = Path.Combine(prgArgs.OutDir, _prgArgs.TypeName) + ".avsc";
-
-            File.WriteAllText(outFile, _sb.ToString());
+            WriteAvroFile();
         }
 
-        
 
         private void WriteRecord(IEnumerable<ExtendedFieldInfo> efi)
         {
@@ -104,8 +101,6 @@ namespace holonsoft.CsAvroGen.Generator
             _sb.AppendLine();
             _sb.Append(_indentProvider.Get());
             _sb.AppendLine("]");
-
         }
-        
     }
 }
