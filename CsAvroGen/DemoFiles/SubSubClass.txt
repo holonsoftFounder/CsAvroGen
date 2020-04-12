@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿// next line will give a warning, because file has already been loaded
+//@meta::include ".\Subclass.txt"
+
+using System.Collections.Generic;
 using System.Drawing;
 using CsAvroGen.DomainModel.AvroAttributes;
 

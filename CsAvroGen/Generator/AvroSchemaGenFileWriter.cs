@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using holonsoft.CsAvroGen.Executer;
 using Microsoft.CodeAnalysis.Emit;
 
 namespace holonsoft.CsAvroGen.Generator

@@ -2,12 +2,13 @@
 using System.Reflection;
 using CsAvroGen.DomainModel;
 using CsAvroGen.DomainModel.AvroAttributes;
+using CsAvroGen.DomainModel.Enums;
 
-namespace holonsoft.CsAvroGen.Executer
+namespace holonsoft.CsAvroGen.ShowRunner
 {
     internal class FieldInspector
     {
-        public void Inspect(ExtendedFieldInfo efi)
+        public void Inspect(ILogging logger, ExtendedFieldInfo efi)
         {
             var fieldType = efi.FieldInfo.FieldType;
             efi.TypeCode = Type.GetTypeCode(fieldType);
@@ -60,7 +61,8 @@ namespace holonsoft.CsAvroGen.Executer
                 {
                     if (fieldType.GenericTypeArguments[0] != typeof(string))
                     {
-                        throw new NotSupportedException("key of AVRO::MAP must be a string, error in field " + efi.FieldName);
+                        logger.LogIt(LogSeverity.Fatal, "i18n::Key of AVRO::MAP must be a string, error in field " + efi.FieldName);
+                        throw new NotSupportedException();
                     }
 
                     efi.TypeCode = Type.GetTypeCode(fieldType.GenericTypeArguments[1]);
@@ -106,16 +108,16 @@ namespace holonsoft.CsAvroGen.Executer
 
                 if (efi.TypeCode != TypeCode.Byte)
                 {
-                    throw new NotSupportedException("fixed is not allowed for other types than BYTE, field: " + efi.FieldName);
+                    logger.LogIt(LogSeverity.Fatal, "i18n::FIXED is not allowed for other types than type BYTE, field: " + efi.FieldName);
+                    throw new NotSupportedException("FIXED is not allowed for other types than type BYTE, field: " + efi.FieldName);
                 }
 
                 if (string.IsNullOrWhiteSpace(efi.FixedFieldClassName))
                 {
-                    throw new ArgumentException("You must provide a DataClassName via attriute, field: " + efi.FieldName);
+                    logger.LogIt(LogSeverity.Fatal, "i18n::You must provide a DataClassName via attribute, field: " + efi.FieldName);
+                    throw new ArgumentException("You must provide a DataClassName via attribute, field: " + efi.FieldName);
                 }
             }
-
-
 
             var aliasAttr = efi.FieldInfo.GetCustomAttribute<AvroAliasAttribute>()?.AliasList;
 
@@ -142,8 +144,7 @@ namespace holonsoft.CsAvroGen.Executer
                 efi.HasNamespace = true;
             }
 
-
-            Console.WriteLine("field " + efi.FieldName + " determined as " + efi.AvroType);
+            logger.LogIt(LogSeverity.Verbose, "i18n::Field {0} determined as {1}", efi.FieldName, efi.AvroType);
 
         }
 

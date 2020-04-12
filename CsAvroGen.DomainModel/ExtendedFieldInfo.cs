@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using CsAvroGen.DomainModel.AvroAttributes;
+using CsAvroGen.DomainModel.Enums;
 
 namespace CsAvroGen.DomainModel
 {

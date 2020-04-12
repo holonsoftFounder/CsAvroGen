@@ -1,5 +1,6 @@
 ﻿using System;
 using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.Enums;
 
 namespace holonsoft.CsAvroGen.Generator
 {

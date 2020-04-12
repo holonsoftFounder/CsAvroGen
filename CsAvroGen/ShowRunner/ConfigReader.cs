@@ -4,8 +4,9 @@ using System.IO;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.Enums;
 
-namespace holonsoft.CsAvroGen.Executer
+namespace holonsoft.CsAvroGen.ShowRunner
 {
     internal class ConfigReader
     {
@@ -17,7 +18,7 @@ namespace holonsoft.CsAvroGen.Executer
 
             if (!File.Exists(configFileName)) return;
 
-            Console.WriteLine("Reading config from " + configFileName);
+            typeInfoData.Logger.LogIt(LogSeverity.Verbose, "i18n::Reading config from " + configFileName);
 
             foreach (var key in ConfigurationManager.AppSettings.AllKeys)
             {
@@ -34,14 +35,22 @@ namespace holonsoft.CsAvroGen.Executer
                 {
                     var v = ConfigurationManager.AppSettings.Get(key);
 
-                    if (int.TryParse(v, out int result))
-                    {
-                        typeInfoData.IndentFactor = result;
-                    }
-                    else
-                    {
-                        typeInfoData.IndentFactor = 2;
-                    }
+                    typeInfoData.IndentFactor = int.TryParse(v, out var result) ? result : 2;
+                }
+
+
+                if (string.Compare(key, "I18N", StringComparison.CurrentCultureIgnoreCase) == 0)
+                {
+                    typeInfoData.Logger.Locale = ConfigurationManager.AppSettings.Get(key);
+                }
+            }
+
+
+            foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (a.FullName.Contains("netstandard", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    typeInfoData.MetadataReferenceList.Add(MetadataReference.CreateFromFile(a.Location));
                 }
             }
         }

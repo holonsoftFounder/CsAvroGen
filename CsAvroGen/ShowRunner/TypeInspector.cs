@@ -3,17 +3,21 @@ using System.IO;
 using System.Reflection;
 using CsAvroGen.DomainModel;
 using CsAvroGen.DomainModel.AvroAttributes;
+using CsAvroGen.DomainModel.Enums;
 
-
-namespace holonsoft.CsAvroGen.Executer
+namespace holonsoft.CsAvroGen.ShowRunner
 {
     internal class TypeInspector
     {
+        private TypeInfoData _typeInfoData;
+
         private readonly FieldInspector _fieldInspector = new FieldInspector();
 
 
         internal void InspectFileBasedCompiledType(ProgramArgs prgArgs, TypeInfoData typeInfoData)
         {
+            _typeInfoData = typeInfoData;
+
             if (!File.Exists(prgArgs.AssemblyName))
             {
                 throw new FileNotFoundException(prgArgs.AssemblyName);
@@ -29,6 +33,8 @@ namespace holonsoft.CsAvroGen.Executer
         
         internal void InspectCompiledType(ProgramArgs prgArgs, TypeInfoData typeInfoData)
         {
+            _typeInfoData = typeInfoData;
+
             foreach (var t in typeInfoData.Assembly.GetExportedTypes())
             {
                 if (!t.Name.Equals(prgArgs.TypeName)) continue;
@@ -39,10 +45,10 @@ namespace holonsoft.CsAvroGen.Executer
 
             if (typeInfoData.InspectedType == null)
             {
+                _typeInfoData.Logger.LogIt(LogSeverity.Fatal, "i18n::Cannot load/find type {0}", prgArgs.TypeName);
                 throw new TypeLoadException(prgArgs.TypeName);
             }
 
-            
             typeInfoData.Namespace = typeInfoData.InspectedType.Namespace;
             
             var ns = typeInfoData.InspectedType.GetCustomAttribute<AvroNamespaceAttribute>()?.NamespaceValue;
@@ -66,7 +72,7 @@ namespace holonsoft.CsAvroGen.Executer
                 var efi = new ExtendedFieldInfo(field);
                 typeInfoData.FieldList.Add(efi);
 
-                _fieldInspector.Inspect(efi);
+                _fieldInspector.Inspect(typeInfoData.Logger, efi);
 
                 if (efi.AvroType == AvroFieldType.Record || efi.AvroType == AvroFieldType.ArrayWithRecordType || efi.AvroType == AvroFieldType.MapWithRecordType)
                 {
@@ -90,7 +96,7 @@ namespace holonsoft.CsAvroGen.Executer
                 var subEfi = new ExtendedFieldInfo(field);
                 efi.SubFieldList.Add(subEfi);
 
-                _fieldInspector.Inspect(subEfi);
+                _fieldInspector.Inspect(_typeInfoData.Logger, subEfi);
 
                 if (subEfi.AvroType == AvroFieldType.Record || efi.AvroType == AvroFieldType.ArrayWithRecordType || efi.AvroType == AvroFieldType.MapWithRecordType)
                 {

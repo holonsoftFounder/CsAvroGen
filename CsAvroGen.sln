@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen", "CsAvroGen\CsAv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen.DomainModel", "CsAvroGen.DomainModel\CsAvroGen.DomainModel.csproj", "{3A7DE44B-9B87-4599-B124-F67738D7D68D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsAvroGen.SelftestData", "CsAvroGen.SelftestData\CsAvroGen.SelftestData.csproj", "{39AEA885-C78A-4858-9372-AC73BB2621D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen.SelftestData", "CsAvroGen.SelftestData\CsAvroGen.SelftestData.csproj", "{39AEA885-C78A-4858-9372-AC73BB2621D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen.I18N.enUS", "CsAvroGen.I18N.enUS\CsAvroGen.I18N.enUS.csproj", "{1D521720-FE32-41EB-967F-BC8E530A102B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{39AEA885-C78A-4858-9372-AC73BB2621D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39AEA885-C78A-4858-9372-AC73BB2621D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39AEA885-C78A-4858-9372-AC73BB2621D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D521720-FE32-41EB-967F-BC8E530A102B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D521720-FE32-41EB-967F-BC8E530A102B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D521720-FE32-41EB-967F-BC8E530A102B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D521720-FE32-41EB-967F-BC8E530A102B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

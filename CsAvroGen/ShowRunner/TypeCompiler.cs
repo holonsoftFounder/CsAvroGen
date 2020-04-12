@@ -4,23 +4,28 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.AvroAttributes;
+using CsAvroGen.DomainModel.Enums;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using CsAvroGen.DomainModel;
-using CsAvroGen.DomainModel.AvroAttributes;
 
-namespace holonsoft.CsAvroGen.Executer
+namespace holonsoft.CsAvroGen.ShowRunner
 {
     public class TypeCompiler
     {
         private readonly List<string> _usingList = new List<string>();
-        
+        private readonly List<string> _fileNameList = new List<string>();
+
+        private ILogging _logger;
 
         public void Compile(ProgramArgs prgArgs, TypeInfoData typeInfoData)
         {
+            _logger = typeInfoData.Logger;
+
             _usingList.Clear();
-        
+            _fileNameList.Clear();
 
             var sourceCode = LoadSourceCode(prgArgs.File);
 
@@ -39,16 +44,16 @@ namespace holonsoft.CsAvroGen.Executer
 
                     foreach (var diagnostic in failures)
                     {
-                        Console.Error.WriteLine("{0}: {1} at {2}", diagnostic.Id, diagnostic.GetMessage(), diagnostic.Location);
+                        _logger.LogIt(LogSeverity.Error,"{0}: {1} at {2}", diagnostic.Id, diagnostic.GetMessage(), diagnostic.Location);
                     }
 
+                    _logger.LogIt(LogSeverity.Fatal, "i18n::Compilation failed");
                     throw new Exception("Compilation failed");
                 }
 
-                Console.WriteLine("Compilation done without any error.");
+                _logger.LogIt(LogSeverity.Info, "i18n::Compilation done without any error.");
 
                 peStream.Seek(0, SeekOrigin.Begin);
-
                 typeInfoData.Assembly = Assembly.Load(peStream.ToArray());
             }
         }
@@ -63,8 +68,16 @@ namespace holonsoft.CsAvroGen.Executer
                 throw new FileNotFoundException(sourceCodeFile);
             }
 
-            var sb = new StringBuilder();
+            if (_fileNameList.Contains(sourceCodeFile))
+            {
+                _logger.LogIt(LogSeverity.Warn, "i18n::Warning: recursion detected, { 0} already loaded", sourceCodeFile);
+                return string.Empty;
+            }
 
+
+            _fileNameList.Add(sourceCodeFile);
+
+            var sb = new StringBuilder();
 
             var listOfAdditionalFiles = new List<string>();
 

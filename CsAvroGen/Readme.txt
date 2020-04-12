@@ -6,5 +6,7 @@
 Read file, compile it and process type
 -f .\DemoFiles\SelfTestingFrom.txt  -tn SelfTestingFromText -o ".\generated"
 
--f "R:\Dev\Products\RoBorder.Plugins\200 Dto\RoBorder.Kafka.dto\rfdata\RFDataTopicTemplate.txt" -tn RFData -o "R:\Dev\Products\RoBorder.Plugins\200 Dto\RoBorder.Kafka.dto\rfdata"
 
+-h Get help
+
+-v Get version info

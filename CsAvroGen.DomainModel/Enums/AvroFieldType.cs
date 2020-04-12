@@ -1,4 +1,4 @@
-﻿namespace CsAvroGen.DomainModel
+﻿namespace CsAvroGen.DomainModel.Enums
 {
     public enum AvroFieldType
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CsAvroGen.DomainModel;
 
-namespace holonsoft.CsAvroGen.Executer
+namespace holonsoft.CsAvroGen.ShowRunner
 {
     internal class IndentProvider
     {

@@ -1,18 +1,21 @@
 ﻿using System;
 using CsAvroGen.DomainModel;
+using CsAvroGen.DomainModel.Enums;
 using holonsoft.CsAvroGen.Generator;
 
-namespace holonsoft.CsAvroGen.Executer
+namespace holonsoft.CsAvroGen.ShowRunner
 {
     public class MainExecuter
     {
         public int Run(ProgramArgs prgArgs)
         {
-            var typeInfoData = new TypeInfoData();
-            var ti = new TypeInspector();
+            var logger = new I18NLogger(prgArgs);
+
+            var typeInfoData = new TypeInfoData(logger);
 
             new ConfigReader().Read(typeInfoData);
 
+            var ti = new TypeInspector();
 
             if (!(string.IsNullOrWhiteSpace(prgArgs.AssemblyName) || string.IsNullOrWhiteSpace(prgArgs.TypeName)))
             {
@@ -22,7 +25,7 @@ namespace holonsoft.CsAvroGen.Executer
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    logger.LogIt(LogSeverity.Fatal, ex.Message);
                     return (int)ReturnCode.TypeInspectionFailed;
                 }
             }
@@ -36,7 +39,7 @@ namespace holonsoft.CsAvroGen.Executer
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        logger.LogIt(LogSeverity.Fatal, ex.Message);
                         return (int)ReturnCode.TypeCompilationFailed;
                     }
 
@@ -46,13 +49,13 @@ namespace holonsoft.CsAvroGen.Executer
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        logger.LogIt(LogSeverity.Fatal, ex.Message);
                         return (int)ReturnCode.TypeInspectionFailed;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Nothing to do - provide an Assembly/Type combination or a valid (compilable) .cs-File with appropriate class(es)");
+                    logger.LogIt(LogSeverity.Info, "i18n::NothingToDo");
                     return (int)ReturnCode.NothingToDo;
                 }
             }
@@ -63,13 +66,13 @@ namespace holonsoft.CsAvroGen.Executer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                logger.LogIt(LogSeverity.Fatal, ex.Message);
+                logger.LogIt(LogSeverity.Fatal, "i18n::Schema generation failed" + Environment.NewLine);
 
-                Console.WriteLine("Schema generation failed");
                 return (int)ReturnCode.SchemaGenerationFailed;
             }
 
-            Console.WriteLine("Done - all is fine!");
+            logger.LogIt(LogSeverity.Info, "i18n::Done - all is fine!");
             return (int)ReturnCode.Ok;
         }
     }
