@@ -5,12 +5,12 @@ For quick readers:
 
 Generate code from a given assemby/type combination:
 
-csavrogen.exe -an CsAvroGen.SelftestData.dll -tn SelfTesting -o ".\generated"
+csavrogen.exe -an <your_assembly>.dll -tn <your_typename> -o "<output_dir>"
 
 
-Read file, compile it and process type:
+Read file(s), compile it and process type:
 
--f .\DemoFiles\SelfTestingFrom.txt  -tn SelfTestingFromText -o ".\generated"
+-f <your_source_file>  -tn <your_typename> -o "<output_dir>"
 
 Get help: -h 
 
@@ -37,7 +37,6 @@ Here is a partial example (please find whole example in package):
 
 
   using System.Collections.Generic;
-  using System.Drawing;
   using CsAvroGen.DomainModel.AvroAttributes;
 
   namespace holonsoft.CsAvroGen.SelfTestData
