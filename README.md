@@ -23,6 +23,9 @@ Using this geneator you have two ways:
 
 Here is a partial example (please find whole example in package):
 
+
+<pre><code>
+
   // Main template file for AVRO schema generation
   //
   // Include other files to get the complete source code
@@ -49,6 +52,8 @@ Here is a partial example (please find whole example in package):
           [AvroDoc("This field has a default value")]
           [AvroDefaultValue(5)]
           public int IntField;
+
+</code></pre>
 
 As you can see, you can split source code files and use the //meta::include tag at the beginning of a line to include more files
 
