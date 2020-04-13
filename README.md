@@ -3,16 +3,18 @@ Generate AVRO schema file from an ordinary POCO
 
 For quick readers:
 
-Generate code from a given assemby/type combination
+Generate code from a given assemby/type combination:
+
 csavrogen.exe -an CsAvroGen.SelftestData.dll -tn SelfTesting -o ".\generated"
 
 
-Read file, compile it and process type
+Read file, compile it and process type:
+
 -f .\DemoFiles\SelfTestingFrom.txt  -tn SelfTestingFromText -o ".\generated"
 
--h Get help
+Get help: -h 
 
--v Get version info
+Get version info: -v 
 
 
 Using this geneator you have two ways: 
