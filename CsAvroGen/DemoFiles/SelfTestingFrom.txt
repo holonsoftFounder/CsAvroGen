@@ -9,9 +9,8 @@
 
 
 using System.Collections.Generic;
-using System.Drawing;
 using CsAvroGen.DomainModel.AvroAttributes;
-
+ 
 namespace holonsoft.CsAvroGen.SelfTestData
 {
     [AvroNamespace("ns.created.by.attribute")]

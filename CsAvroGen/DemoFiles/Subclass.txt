@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic; 
 using CsAvroGen.DomainModel.AvroAttributes;
 
 namespace holonsoft.CsAvroGen.SelfTestData

@@ -70,7 +70,7 @@ namespace holonsoft.CsAvroGen.ShowRunner
 
             if (_fileNameList.Contains(sourceCodeFile))
             {
-                _logger.LogIt(LogSeverity.Warn, "i18n::Warning: recursion detected, { 0} already loaded", sourceCodeFile);
+                _logger.LogIt(LogSeverity.Warn, "i18n::Warning: recursion detected, {0} already loaded", sourceCodeFile);
                 return string.Empty;
             }
 

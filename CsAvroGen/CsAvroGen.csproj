@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>csavrogen</ToolCommandName>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>holonsoft.CsAvroGen</RootNamespace>
     <Version>1.1.0.1</Version>
@@ -14,6 +16,10 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryType>GIT</RepositoryType>
     <RepositoryUrl>https://github.com/holonsoft/CsAvroGen</RepositoryUrl>
+    <Description>AVRO schema generation tool for C#.
+Just provide a simple C# POCO as textfile and generate any complex AVRO schema, e. g. for usage with APACHE KAFKA. Easy to use and full featured schema generator.
+</Description>
+    <PackageTags>#apache #avro #generation #schema #parser #avroschema #generator #netstandard2.1 #netcore3.1 #kafka</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,8 +1,7 @@
 ﻿// next line will give a warning, because file has already been loaded
 //@meta::include ".\Subclass.txt"
 
-using System.Collections.Generic;
-using System.Drawing;
+using System.Collections.Generic; 
 using CsAvroGen.DomainModel.AvroAttributes;
 
 namespace holonsoft.CsAvroGen.SelfTestData
