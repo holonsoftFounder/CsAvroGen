@@ -171,6 +171,9 @@ namespace holonsoft.CsAvroGen.ShowRunner
                 case TypeCode.Decimal:
                     efi.AvroType = AvroFieldType.Logical;
                     break;
+                case TypeCode.Boolean:
+                    efi.AvroType = AvroFieldType.Boolean;
+                    break;
             }
         }
     }

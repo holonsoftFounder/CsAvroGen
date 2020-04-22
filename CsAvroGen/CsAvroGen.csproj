@@ -6,7 +6,7 @@
     <ToolCommandName>csavrogen</ToolCommandName>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>holonsoft.CsAvroGen</RootNamespace>
-    <Version>1.1.0.1</Version>
+    <Version>1.2.0.1</Version>
     <Authors>Christian Vogt</Authors>
     <Company>holonsoft, Christian Vogt</Company>
     <Copyright>Christian Vogt, holonsoft</Copyright>

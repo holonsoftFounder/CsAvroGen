@@ -57,6 +57,9 @@ namespace holonsoft.CsAvroGen.SelfTestData
         [AvroDoc("Special byte field with fixed length")]
 		[AvroFixed("FixedData1", 16)]
 		public byte[] FixedField;
+
+        [AvroDoc("Simple bool field")]
+        public bool BoolField;
 	}
     
 

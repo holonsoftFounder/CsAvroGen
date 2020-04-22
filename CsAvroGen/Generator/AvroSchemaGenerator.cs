@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using CsAvroGen.DomainModel;
 using holonsoft.CsAvroGen.ShowRunner;
@@ -95,8 +96,20 @@ namespace holonsoft.CsAvroGen.Generator
             {
                 WriteFieldToAvro(extendedFieldInfo);
             }
-
+            
             _indentProvider.DecLevel();
+
+            for (var i = _sb.Length - 1; i > 0; i--)
+            {
+                if (_sb[i] == '}') break;
+                if (_sb[i] == ']') break;
+
+                if (_sb[i] == ',')
+                {
+                    _sb[i] = ' ';
+                    break;
+                }
+            }
 
             _sb.AppendLine();
             _sb.Append(_indentProvider.Get());
