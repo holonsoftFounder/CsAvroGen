@@ -17,7 +17,7 @@ Get help: -h
 Get version info: -v 
 
 
-Using this geneator you have two ways: 
+Using this geneator you have two possibilities: 
 1. You provide an assembly with type to be inspected. This is for cases you don't get source code of a type
 2. You provide a textfile with source code - yeah, you read that right. The source code file(s) will be compiled on the fly and afterwards the generation of AVRO schema will be done. This makes it very easy to test until you get a result that matches your expectations.
 
