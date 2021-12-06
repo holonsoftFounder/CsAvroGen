@@ -4,9 +4,9 @@
     <OutputType>Exe</OutputType>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>csavrogen</ToolCommandName>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <RootNamespace>holonsoft.CsAvroGen</RootNamespace>
-    <Version>1.2.0.1</Version>
+    <Version>1.6.1</Version>
     <Authors>Christian Vogt</Authors>
     <Company>holonsoft, Christian Vogt</Company>
     <Copyright>Christian Vogt, holonsoft</Copyright>
@@ -19,8 +19,30 @@
     <Description>AVRO schema generation tool for C#.
 Just provide a simple C# POCO as textfile and generate any complex AVRO schema, e. g. for usage with APACHE KAFKA. Easy to use and full featured schema generator.
 </Description>
-    <PackageTags>#apache #avro #generation #schema #parser #avroschema #generator #netstandard2.1 #netcore3.1 #kafka</PackageTags>
+    <PackageTags>#apache #avro #generation #schema #parser #avroschema #generator #netstandard2.1 #netcore3.1 #net5.0 #net6.0 #kafka</PackageTags>
   </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
+		<WarningLevel>5</WarningLevel>
+		<NoWarn>1701;1702</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net5.0|AnyCPU'">
+		<WarningLevel>5</WarningLevel>
+		<NoWarn>1701;1702</NoWarn>
+	</PropertyGroup>
+
+
+ <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+    <NoWarn>1701;1702</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+    <NoWarn>1701;1702</NoWarn>
+  </PropertyGroup>
+ 
 
   <ItemGroup>
     <None Include="..\LICENSE">
@@ -30,13 +52,13 @@ Just provide a simple C# POCO as textfile and generate any complex AVRO schema, 
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="holonsoft.CmdLineParser" Version="2.1.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.5.0" />
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.5.0">
+    <PackageReference Include="holonsoft.CmdLineParser" Version="2.6.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" />
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
