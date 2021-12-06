@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CsAvroGen": {
+      "commandName": "Project",
+      "commandLineArgs": "-f .\\DemoFiles\\SelfTestingFrom.txt  -tn SelfTestingFromText -o \".\\generated\""
+    }
+  }
+}

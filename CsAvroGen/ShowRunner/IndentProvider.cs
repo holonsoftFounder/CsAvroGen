@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CsAvroGen.DomainModel;
+using CsAvroGen.Abstractions;
 
 namespace holonsoft.CsAvroGen.ShowRunner
 {

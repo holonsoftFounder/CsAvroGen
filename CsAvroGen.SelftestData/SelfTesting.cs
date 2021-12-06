@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using CsAvroGen.DomainModel.AvroAttributes;
+using CsAvroGen.Abstractions.AvroAttributes;
 
 namespace CsAvroGen.SelftestData
 {

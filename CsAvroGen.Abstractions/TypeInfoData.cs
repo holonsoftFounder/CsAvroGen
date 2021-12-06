@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 
-namespace CsAvroGen.DomainModel
+namespace CsAvroGen.Abstractions
 {
     public class TypeInfoData
     {

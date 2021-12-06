@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using CsAvroGen.DomainModel.AvroAttributes;
-using CsAvroGen.DomainModel.Enums;
+using CsAvroGen.Abstractions.Enums;
 
-namespace CsAvroGen.DomainModel
+namespace CsAvroGen.Abstractions
 {
     public class ExtendedFieldInfo
     {

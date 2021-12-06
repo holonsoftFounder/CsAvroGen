@@ -1,6 +1,6 @@
-﻿using CsAvroGen.DomainModel.Enums;
+﻿using CsAvroGen.Abstractions.Enums;
 
-namespace CsAvroGen.DomainModel
+namespace CsAvroGen.Abstractions
 {
     public interface ILogging
     {

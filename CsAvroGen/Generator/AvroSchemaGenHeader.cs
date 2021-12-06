@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Text;
-using CsAvroGen.DomainModel;
+using CsAvroGen.Abstractions;
 
 namespace holonsoft.CsAvroGen.Generator
 {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29926.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen", "CsAvroGen\CsAvroGen.csproj", "{05F7500E-9F44-41E1-A8FF-0E06558D4814}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen", "CsAvroGen\CsAv
 		{39AEA885-C78A-4858-9372-AC73BB2621D6} = {39AEA885-C78A-4858-9372-AC73BB2621D6}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen.DomainModel", "CsAvroGen.DomainModel\CsAvroGen.DomainModel.csproj", "{3A7DE44B-9B87-4599-B124-F67738D7D68D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen.Abstractions", "CsAvroGen.Abstractions\CsAvroGen.Abstractions.csproj", "{3A7DE44B-9B87-4599-B124-F67738D7D68D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsAvroGen.SelftestData", "CsAvroGen.SelftestData\CsAvroGen.SelftestData.csproj", "{39AEA885-C78A-4858-9372-AC73BB2621D6}"
 EndProject

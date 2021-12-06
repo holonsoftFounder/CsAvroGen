@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CsAvroGen.DomainModel.AvroAttributes
+namespace CsAvroGen.Abstractions.AvroAttributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class AvroNamespaceAttribute : Attribute

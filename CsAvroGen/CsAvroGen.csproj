@@ -40,7 +40,7 @@ Just provide a simple C# POCO as textfile and generate any complex AVRO schema, 
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CsAvroGen.DomainModel\CsAvroGen.DomainModel.csproj" />
+    <ProjectReference Include="..\CsAvroGen.Abstractions\CsAvroGen.Abstractions.csproj" />
     <ProjectReference Include="..\CsAvroGen.I18N.enUS\CsAvroGen.I18N.enUS.csproj" />
     <ProjectReference Include="..\CsAvroGen.SelftestData\CsAvroGen.SelftestData.csproj" />
   </ItemGroup>

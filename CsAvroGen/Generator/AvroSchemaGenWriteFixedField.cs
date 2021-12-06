@@ -1,5 +1,5 @@
 ﻿using System;
-using CsAvroGen.DomainModel;
+using CsAvroGen.Abstractions;
 
 namespace holonsoft.CsAvroGen.Generator
 {

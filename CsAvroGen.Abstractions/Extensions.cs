@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace CsAvroGen.DomainModel
+namespace CsAvroGen.Abstractions
 {
     public static class Extensions
     {

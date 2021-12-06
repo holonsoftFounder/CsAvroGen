@@ -1,4 +1,4 @@
-﻿using CsAvroGen.DomainModel.Enums;
+﻿using CsAvroGen.Abstractions.Enums;
 using holonsoft.CmdLineParser.DomainModel;
 
 namespace holonsoft.CsAvroGen

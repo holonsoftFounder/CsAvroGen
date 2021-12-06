@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CsAvroGen.DomainModel.AvroAttributes
+namespace CsAvroGen.Abstractions.AvroAttributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
     public class AvroAliasAttribute : Attribute

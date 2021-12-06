@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using CsAvroGen.DomainModel;
-using CsAvroGen.DomainModel.Enums;
+using CsAvroGen.Abstractions;
+using CsAvroGen.Abstractions.Enums;
 using holonsoft.CmdLineParser;
 using holonsoft.CsAvroGen.ShowRunner;
 

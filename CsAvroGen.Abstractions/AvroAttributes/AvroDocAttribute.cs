@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CsAvroGen.DomainModel.AvroAttributes
+namespace CsAvroGen.Abstractions.AvroAttributes
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class)]
     public class AvroDocAttribute : Attribute

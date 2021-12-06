@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CsAvroGen.DomainModel\CsAvroGen.DomainModel.csproj" />
+    <ProjectReference Include="..\CsAvroGen.Abstractions\CsAvroGen.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

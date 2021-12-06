@@ -2,9 +2,9 @@
 using System.Configuration;
 using System.IO;
 using System.Reflection;
+using CsAvroGen.Abstractions;
+using CsAvroGen.Abstractions.Enums;
 using Microsoft.CodeAnalysis;
-using CsAvroGen.DomainModel;
-using CsAvroGen.DomainModel.Enums;
 
 namespace holonsoft.CsAvroGen.ShowRunner
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using CsAvroGen.DomainModel;
-using CsAvroGen.DomainModel.AvroAttributes;
-using CsAvroGen.DomainModel.Enums;
+using CsAvroGen.Abstractions;
+using CsAvroGen.Abstractions.AvroAttributes;
+using CsAvroGen.Abstractions.Enums;
 
 namespace holonsoft.CsAvroGen.ShowRunner
 {
